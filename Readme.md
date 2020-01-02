@@ -12,7 +12,7 @@
         * Через DBeaver настроить подключение к каждой БД через соответствующую СУБД. Пример настройки подключения к MySQL:
         
         ![DB-connection-settings](https://github.com/gruzdevni/diploma/blob/master/resources/DB-connection-settings.png)
-        * Выполнить подключение к БД. Таблиц в БД нет, так как приложение еще не запушено.
+        * Выполнить подключение к БД. Таблиц в БД нет, так как приложение еще не запущено.
     * Запустить приложение через `java -jar aqa-shop.jar`. Пример запущенного приложения:
     
     ![application-launched](https://github.com/gruzdevni/diploma/blob/master/resources/application-launched.png)
