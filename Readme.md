@@ -7,8 +7,8 @@
         + MySQL (http://www.mysql.ru/download/)
             - Во время первоначальной конфигурации установщик предложит создать пользователей.
             ![mysql-user-creation-during-install](https://github.com/gruzdevni/diploma/blob/master/resources/mysql-user-creation-during-install.PNG)
-            Создайте пользователя app c паролем app.
-            ![mysql-user-properties](https://github.com/gruzdevni/diploma/blob/master/resources/mysql-user-properties.PNG)
+            Создайте пользователя app c паролем pass.
+            <br>![mysql-user-properties](https://github.com/gruzdevni/diploma/blob/master/resources/mysql-user-properties.PNG)</br>
             - После установки СУБД зайти в командную строку.
             ![mysql-cmd-loaded](https://github.com/gruzdevni/diploma/blob/master/resources/mysql-cmd-loaded.PNG)
             С помощью команды `CREATE DATABASE app` создайте базу данных.
