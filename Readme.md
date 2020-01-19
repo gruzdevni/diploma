@@ -6,27 +6,27 @@
     * Скачать и установить СУБД. Настроить DBeaver.
         + MySQL (http://www.mysql.ru/download/)
             - Во время первоначальной конфигурации установщик предложит создать пользователей.
-            ![mysql-user-creation-during-install](https://github.com/gruzdevni/diploma/blob/master/resources/DB-connection-settings.png)
+            ![mysql-user-creation-during-install](https://github.com/gruzdevni/diploma/blob/master/resources/mysql-user-creation-during-install.PNG)
             Создайте пользователя app c паролем app.
-            ![mysql-user-properties](https://github.com/gruzdevni/diploma/blob/master/resources/DB-connection-settings.png)
+            ![mysql-user-properties](https://github.com/gruzdevni/diploma/blob/master/resources/mysql-user-properties.PNG)
             - После установки СУБД зайти в командную строку.
-            ![mysql-cmd-loaded](https://github.com/gruzdevni/diploma/blob/master/resources/DB-connection-settings.png)
+            ![mysql-cmd-loaded](https://github.com/gruzdevni/diploma/blob/master/resources/mysql-cmd-loaded.PNG)
             С помощью команды `CREATE DATABASE app` создайте базу данных.
-            ![mysql-appDB-creation](https://github.com/gruzdevni/diploma/blob/master/resources/DB-connection-settings.png)
+            ![mysql-appDB-creation](https://github.com/gruzdevni/diploma/blob/master/resources/mysql-appDB-creation.PNG)
             - Через DBeaver настроить подключение к БД. Пример настройки подключения к MySQL:
             ![DB-connection-settings](https://github.com/gruzdevni/diploma/blob/master/resources/DB-connection-settings.png)
             - В свойстве драйвера `allowPublicKeyRetrieval` поставить значение `TRUE`. В `serverTimezone` - `CET`.
         + PostgreSQL (https://www.postgresql.org/download/)
             - Создание пользователя и БД выполняется через дефолтный SQL Shell.
-            ![postgres-cmd-loaded](https://github.com/gruzdevni/diploma/blob/master/resources/DB-connection-settings.png)
+            ![postgres-cmd-loaded](https://github.com/gruzdevni/diploma/blob/master/resources/postgres-cmd-loaded.PNG)
             - С помощью команды `CREATE DATABASE app;` создайте базу данных.
-            ![postgres-appDB-creation](https://github.com/gruzdevni/diploma/blob/master/resources/DB-connection-settings.png)
+            ![postgres-appDB-creation](https://github.com/gruzdevni/diploma/blob/master/resources/postgres-appDB-creation.PNG)
             - Создайте пользователя app c паролем pass командой `CREATE USER app WITH password 'pass';`.
-            ![postgres-appuser-created](https://github.com/gruzdevni/diploma/blob/master/resources/DB-connection-settings.png)
+            ![postgres-appuser-created](https://github.com/gruzdevni/diploma/blob/master/resources/postgres-appuser-created.PNG)
             - Командой `GRANT ALL ON DATABASE app TO app;` выдайте пользователю привилегии.
-            ![postgres-appuser-grant](https://github.com/gruzdevni/diploma/blob/master/resources/DB-connection-settings.png)
+            ![postgres-appuser-grant](https://github.com/gruzdevni/diploma/blob/master/resources/postgres-appuser-grant.PNG)
             - Через DBeaver настроить подключение к БД. Пример настройки подключения к PostgreSQL:
-            ![postgreSQL-connection-settings](https://github.com/gruzdevni/diploma/blob/master/resources/DB-connection-settings.png) 
+            ![postgreSQL-connection-settings](https://github.com/gruzdevni/diploma/blob/master/resources/postgreSQL-connection-settings.PNG) 
     * Выполнить подключение к БД. Таблиц в БД нет, так как приложение еще не запущено.
     * Запустить сервис gate-simulator. В корне проекта имется папка gate-simulator. Из этой папки нужно выполнить команду `npm start`.
       Скриншот запущенного приложения:
