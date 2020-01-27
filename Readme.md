@@ -33,18 +33,16 @@
       ![gate-simulator-launched](https://github.com/gruzdevni/diploma/blob/master/resources/gate-simulator-launched.png) 
     * Запустить приложение через `java -jar aqa-shop.jar`. Пример запущенного приложения:
     ![application-launched](https://github.com/gruzdevni/diploma/blob/master/resources/application-launched.png)
+    
+    Для запуска под MySQL использовать команду
+    `java -Dspring.datasource.url=jdbc:mysql://localhost:3306/app -jar aqa-shop.jar`
+    
+    Для запуска под PostgreSQL использовать команду
+    `java -Dspring.datasource.url=jdbc:postgresql://localhost:5432/app -jar aqa-shop.jar`
+    
     * После успешного запуска приложения, в зависимости от того, подлючение к какой СУБД было прописано в `application.properties`, в БД будут созданы соответствующие пустые таблицы.
     ![tables-created](https://github.com/gruzdevni/diploma/blob/master/resources/tables-created.png)
     
 ___Примечания___
-
-1. _Тесты должны запускаться поочередно: сначала для одной СУБД, потом для другой.
-Файл `application.properties` не содержит данных о подключении к конкретной СУБД.
-Для запуска тестов для MySQL добавьте в него строку:_
-`spring.datasource.url=jdbc:mysql://localhost:3306/app?useUnicode=true&serverTimezone=UTC`
-_После выполнения тестов для MySQL нужно завершить работу приложения.
-Строку подключения к MySQL заменить на следующую строку подключения к PostgreSQL:_
-`spring.datasource.url=jdbc:postgresql://localhost:5432/app`.
-_После этого вновь запустить приложение и тесты для PostgreSQL._
 
 1. _База данных app создается единожды (для каждой СУБД)._

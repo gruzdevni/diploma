@@ -2,6 +2,8 @@ package postgreSqlTests;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
+import data.Credit;
+import data.Order;
 import lombok.val;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
@@ -61,8 +63,8 @@ public class CreditNotValidCardTest {
             String orderTransactionId = orderRow.getPayment_id();
             assertNotNull(orderRow);
             assertNotNull(creditRow);
-            assertEquals("DECLINED", creditStatus, "Credit status should be as");
-            assertEquals(creditTransactionId, orderTransactionId, "Credit and Order IDs are not equal");
+            assertEquals("DECLINED", creditStatus, "data.Credit status should be as");
+            assertEquals(creditTransactionId, orderTransactionId, "data.Credit and data.Order IDs are not equal");
         }
     }
 
