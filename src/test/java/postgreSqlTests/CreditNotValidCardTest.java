@@ -52,9 +52,7 @@ public class CreditNotValidCardTest {
         val creditSQLQuery = "SELECT * FROM credit_request_entity WHERE created IN (SELECT max(created) FROM credit_request_entity);";
         val runner = new QueryRunner();
         try (
-                val conn = DriverManager.getConnection(
-                        "jdbc:postgresql://localhost:5432/app", "app", "pass"
-                );
+                val conn = DriverManager.getConnection(data.SQL.url, "app", "pass");
         ) {
             val orderRow = runner.query(conn, orderSQLQuery, new BeanHandler<>(Order.class));
             val creditRow = runner.query(conn, creditSQLQuery, new BeanHandler<>(Credit.class));

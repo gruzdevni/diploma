@@ -2,6 +2,7 @@ package data;
 
 import com.github.javafaker.Faker;
 
+import java.util.Calendar;
 import java.util.Locale;
 import java.util.Random;
 
@@ -46,4 +47,12 @@ public class DataGeneration {
         i += min;
         return String.valueOf(i);
     }
+
+    public static String getYear() {
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        int futureYear = year - 2000 + 3;
+        return String.valueOf(futureYear);
+    }
+
+
 }
