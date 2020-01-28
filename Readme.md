@@ -1,5 +1,11 @@
-# Порядок действий для обеспечения возможности запуска автотестов
-## Все действия выполняются на Windows. Если у вас другая ОС, то шаги/команды могут отличаться.
+# Дипломный проект
+
+[План работ](https://github.com/gruzdevni/diploma/blob/master/resources/Plan.md)
+
+<details>
+<summary>**Порядок действий для обеспечения возможности запуска автотестов**</summary>
+
+### Все действия выполняются на Windows. Если у вас другая ОС, то шаги/команды могут отличаться.
 
 1. В соответствии с планом работ на локальную машину должны быть установлены MySQL, PostgreSQL (далее система управления базой данных - СУБД), Node.js, DBeaver.
 2. Для возможности запуска авто-тестов необходимо выполнить следующие действия:
@@ -30,19 +36,21 @@
     * Выполнить подключение к БД. Таблиц в БД нет, так как приложение еще не запущено.
     * Запустить сервис gate-simulator. В корне проекта имется папка gate-simulator. Из этой папки нужно выполнить команду `npm start`.
       Скриншот запущенного приложения:
-      ![gate-simulator-launched](https://github.com/gruzdevni/diploma/blob/master/resources/gate-simulator-launched.png) 
-    * Запустить приложение через `java -jar aqa-shop.jar`. Пример запущенного приложения:
-    ![application-launched](https://github.com/gruzdevni/diploma/blob/master/resources/application-launched.png)
-    
-    Для запуска под MySQL использовать команду
+      ![gate-simulator-launched](https://github.com/gruzdevni/diploma/blob/master/resources/gate-simulator-launched.png)
+      
+      ___Примечания___
+      
+      _База данных app создается единожды (для каждой СУБД)._
+</details>
+
+* Для запуска приложения под MySQL использовать команду
     `java -Dspring.datasource.url=jdbc:mysql://localhost:3306/app -jar aqa-shop.jar`
     
-    Для запуска под PostgreSQL использовать команду
+* Для запуска под PostgreSQL использовать команду
     `java -Dspring.datasource.url=jdbc:postgresql://localhost:5432/app -jar aqa-shop.jar`
     
-    * После успешного запуска приложения, в зависимости от того, подлючение к какой СУБД было прописано в `application.properties`, в БД будут созданы соответствующие пустые таблицы.
-    ![tables-created](https://github.com/gruzdevni/diploma/blob/master/resources/tables-created.png)
-    
-___Примечания___
-
-1. _База данных app создается единожды (для каждой СУБД)._
+* Для запуска тестов для MySQL использовать команду
+     `gradlew -Durl=jdbc:mysql://localhost:3306/app clean test allureReport`
+     
+* Для запуска тестов для PostgreSQL использовать команду
+     `gradlew -Durl=jdbc:postgresql://localhost:5432/app clean test allureReport`
