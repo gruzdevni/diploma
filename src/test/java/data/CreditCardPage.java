@@ -1,12 +1,11 @@
 package data;
 
-import com.codeborne.selenide.Condition;
 import org.openqa.selenium.Keys;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
-import static data.DebitCardPage.formFilling;
+import static data.Form.formFilling;
 
 public class CreditCardPage {
     public CreditCardPage declinedPageFilling() {

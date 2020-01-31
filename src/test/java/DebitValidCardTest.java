@@ -1,17 +1,14 @@
-import com.codeborne.selenide.Condition;
+import data.Asserts;
+import data.CardStatus;
 import data.DebitCardPage;
 import data.Initialisation;
-import lombok.val;
-import org.apache.commons.dbutils.QueryRunner;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import static com.codeborne.selenide.Selectors.withText;
-import static com.codeborne.selenide.Selenide.$;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class DebitValidCardTest {
 
@@ -27,19 +24,17 @@ public class DebitValidCardTest {
     void first_successfulFormFilling() {
         debitCardPage = new DebitCardPage();
         debitCardPage.approvedPageFilling();
-        $(withText("Успешно")).waitUntil(Condition.visible, 15000);
-        $(withText("Ошибка")).shouldNotBe(Condition.appear);
+        assertTrue(Asserts.isSuccessNotificationShown());
+        assertTrue(Asserts.isErrorNotificationNotShown());
     }
 
     @Test
     void second_dataBaseTest() throws SQLException {
-        data.SQL.latestOrderQuery();
-        data.SQL.latestPaymentQuery();
-        val runner = new QueryRunner();
-        try (
-                val conn = DriverManager.getConnection(data.SQL.url, "app", "pass");
-        ) {
-            data.SQL.dbAsserts(data.SQL.latestOrderQuery(), data.SQL.latestPaymentQuery(), runner, conn);
-        }
+        data.SQL.connection();
+        assertNotNull(data.SQL.orderRow());
+        assertNotNull(data.SQL.paymentRow());
+        assertEquals(String.valueOf(CardStatus.APPROVED), String.valueOf(data.SQL.paymentStatus()), "Transaction status should be as");
+        assertEquals(data.SQL.paymentTransactionId(), data.SQL.orderPaymentId(), "Transaction and Order IDs are not equal");
+        assertEquals(45000, data.SQL.transactionAmount(), "Transaction amount should be as");
     }
 }

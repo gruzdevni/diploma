@@ -5,26 +5,12 @@ import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class SQL {
 
-    public static void dbAsserts(String orderSQLQuery, String paymentSQLQuery, QueryRunner runner, Connection conn) throws SQLException {
-        val orderRow = runner.query(conn, latestOrderQuery(), new BeanHandler<>(Order.class));
-        val paymentRow = runner.query(conn, latestPaymentQuery(), new BeanHandler<>(Payment.class));
-        String paymentStatus = paymentRow.getStatus();
-        int transactionAmount = paymentRow.getAmount();
-        String paymentTransactionId = paymentRow.getTransaction_id();
-        String orderTransactionId = orderRow.getPayment_id();
-        assertNotNull(orderRow);
-        assertNotNull(paymentRow);
-        assertEquals("APPROVED", paymentStatus, "Transaction status should be as");
-        assertEquals(45000, transactionAmount, "Transaction amount should be as");
-        assertEquals(paymentTransactionId, orderTransactionId, "data.Payment and data.Order IDs are not equal");
-    }
+    public static String url = System.getProperty("url");
 
     public static String latestOrderQuery() {
         return "SELECT * FROM order_entity WHERE created IN (SELECT max(created) FROM order_entity);";
@@ -34,8 +20,62 @@ public class SQL {
         return "SELECT * FROM payment_entity WHERE created IN (SELECT max(created) FROM payment_entity);";
     }
 
-    public static final String url = System.getProperty("url");
+    public static String latestCreditQuery() {
+        return "SELECT * FROM credit_request_entity WHERE created IN (SELECT max(created) FROM credit_request_entity);";
+    }
 
+    public static Order orderRow() throws SQLException {
+        val orderRow = runner().query(connection(), latestOrderQuery(), new BeanHandler<>(Order.class));
+        return (Order) orderRow;
+    }
+
+    public static Payment paymentRow() throws SQLException {
+        val paymentRow = runner().query(connection(), latestPaymentQuery(), new BeanHandler<>(Payment.class));
+        return (Payment) paymentRow;
+    }
+
+    public static Credit creditRow() throws SQLException {
+        val creditRow = runner().query(connection(), latestCreditQuery(), new BeanHandler<>(Credit.class));
+        return (Credit) creditRow;
+    }
+
+    public static Connection connection() throws SQLException {
+        val conn = DriverManager.getConnection(url, "app", "pass");
+        return conn;
+    }
+
+    public static QueryRunner runner() throws SQLException {
+        val runner = new QueryRunner();
+        return runner;
+    }
+
+    public static String creditStatus() throws SQLException {
+        return creditRow().getStatus();
+    }
+
+    public static String creditTransactionId() throws SQLException {
+        return creditRow().getBank_id();
+    }
+
+    public static String orderCreditId() throws SQLException {
+        return orderRow().getCredit_id();
+    }
+
+    public static String orderPaymentId() throws SQLException {
+        return orderRow().getPayment_id();
+    }
+
+    public static String paymentStatus() throws SQLException {
+        return paymentRow().getStatus();
+    }
+
+    public static String paymentTransactionId() throws SQLException {
+        return paymentRow().getTransaction_id();
+    }
+
+    public static int transactionAmount() throws SQLException {
+        return paymentRow().getAmount();
+    }
 }
 
 // "jdbc:mysql://localhost:3306/app?useUnicode=true&serverTimezone=UTC"

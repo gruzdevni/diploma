@@ -1,23 +1,14 @@
-import com.codeborne.selenide.Condition;
+import data.Asserts;
 import data.CardStatus;
 import data.CreditCardPage;
 import data.Initialisation;
-import lombok.val;
-import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import data.Credit;
-import data.Order;
 
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import static com.codeborne.selenide.Selectors.withText;
-import static com.codeborne.selenide.Selenide.$;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CreditValidCardTest {
 
@@ -33,28 +24,15 @@ public class CreditValidCardTest {
     void first_successfulFormFilling() {
         creditCardPage = new CreditCardPage();
         creditCardPage.approvedPageFilling();
-        $(withText("Успешно")).waitUntil(Condition.visible, 15000);
-        $(withText("Ошибка")).shouldNotBe(Condition.appear);
+        assertTrue(Asserts.isSuccessNotificationShown());
+        assertTrue(Asserts.isErrorNotificationNotShown());
     }
 
     @Test
     void second_dataBaseTest() throws SQLException {
-
-        val orderSQLQuery = "SELECT * FROM order_entity WHERE created IN (SELECT max(created) FROM order_entity);";
-        val creditSQLQuery = "SELECT * FROM credit_request_entity WHERE created IN (SELECT max(created) FROM credit_request_entity);";
-        val runner = new QueryRunner();
-        try (
-                val conn = DriverManager.getConnection(data.SQL.url, "app", "pass");
-        ) {
-            val orderRow = runner.query(conn, orderSQLQuery, new BeanHandler<>(Order.class));
-            val creditRow = runner.query(conn, creditSQLQuery, new BeanHandler<>(Credit.class));
-            assertNotNull(orderRow);
-            assertNotNull(creditRow);
-            String creditStatus = creditRow.getStatus();
-            String creditTransactionId = creditRow.getBank_id();
-            String orderTransactionId = orderRow.getPayment_id();
-            assertEquals(CardStatus.APPROVED, creditStatus, "data.Credit status should be as");
-            assertEquals(creditTransactionId, orderTransactionId, "data.Credit and data.Order IDs are not equal");
-        }
+        assertNotNull(data.SQL.orderRow());
+        assertNotNull(data.SQL.creditRow());
+        assertEquals(String.valueOf(CardStatus.APPROVED), String.valueOf(data.SQL.creditStatus()), "Credit status should be as");
+        assertEquals(data.SQL.creditTransactionId(), data.SQL.orderCreditId(), "Credit and Order IDs are not equal");
     }
 }
