@@ -9,35 +9,34 @@ import static data.Form.formFilling;
 
 public class CreditCardPage {
     public CreditCardPage declinedPageFilling() {
-        open("http://localhost:8080");
-        $("button:last-of-type").click();
-        formFilling(DataGeneration.declinedCard());
-        $(withText("Продолжить")).click();
+        Initialisation.loadPage();
+        Form.creditButton();
+        Form.formFilling(DataGeneration.declinedCard());
+        Form.continueButton();
         return new CreditCardPage();
     }
 
     public CreditCardPage approvedPageFilling() {
-        open("http://localhost:8080");
-        $("button:last-of-type").click();
-        formFilling(DataGeneration.approvedCard());
-        $(withText("Продолжить")).click();
+        Initialisation.loadPage();
+        Form.creditButton();
+        Form.formFilling(DataGeneration.approvedCard());
+        Form.continueButton();
         return new CreditCardPage();
     }
 
     public CreditCardPage withoutOutCVCFilling() {
-        open("http://localhost:8080");
-        $("button:last-of-type").click();
-        formFilling(DataGeneration.approvedCard());
-        $(byText("CVC/CVV")).parent().$(byCssSelector(".input__control")).sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.DELETE);
-        $(withText("Продолжить")).click();
+        Initialisation.loadPage();
+        Form.creditButton();
+        Form.formFillingWithoutCVC(DataGeneration.approvedCard());
+        Form.continueButton();
         return new CreditCardPage();
     }
 
     public CreditCardPage wrongCardFilling() {
-        open("http://localhost:8080");
-        $("button:last-of-type").click();
-        formFilling(DataGeneration.wrongCard());
-        $(withText("Продолжить")).click();
+        Initialisation.loadPage();
+        Form.creditButton();
+        Form.formFilling(DataGeneration.wrongCard());
+        Form.continueButton();
         return new CreditCardPage();
     }
 }

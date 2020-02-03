@@ -7,28 +7,28 @@ import java.util.Locale;
 import java.util.Random;
 
 public class DataGeneration {
-    private static Faker faker = new Faker(new Locale("en"));
+    private Faker faker = new Faker(new Locale("en"));
 
-    public static String getName() {
+    public String getName() {
         String lastName = faker.name().lastName();
         String firstName = faker.name().firstName();
         String name = firstName + " " + lastName;
         return name;
     }
 
-    public static String approvedCard() {
+    public String approvedCard() {
         return "4444444444444441";
     }
 
-    public static String declinedCard() {
+    public String declinedCard() {
         return "4444444444444442";
     }
 
-    public static String wrongCard() {
+    public String wrongCard() {
         return "44444";
     }
 
-    public static String getMonth() {
+    public String getMonth() {
         int min = 1;
         int max = 12;
         int diff = max - min;
@@ -38,7 +38,7 @@ public class DataGeneration {
         return String.format("%02d", i);
     }
 
-    public static String getCVC() {
+    public String getCVC() {
         int min = 100;
         int max = 999;
         int diff = max - min;
@@ -48,11 +48,9 @@ public class DataGeneration {
         return String.valueOf(i);
     }
 
-    public static String getYear() {
+    public String getYear() {
         int year = Calendar.getInstance().get(Calendar.YEAR);
         int futureYear = year - 2000 + 3;
         return String.valueOf(futureYear);
     }
-
-
 }

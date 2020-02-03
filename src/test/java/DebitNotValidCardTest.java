@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class DebitNotValidCardTest {
 
     @BeforeAll
-    public static void setUp() {
+    public void setUp() {
         Initialisation.browserSettings();
     }
 

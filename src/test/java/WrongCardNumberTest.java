@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class WrongCardNumberTest {
 
     @BeforeAll
-    public static void setUp() {
+    public void setUp() {
         Initialisation.browserSettings();
     }
 

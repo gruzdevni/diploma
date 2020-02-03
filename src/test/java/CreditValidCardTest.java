@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CreditValidCardTest {
 
     @BeforeAll
-    public static void setUp() {
+    public void setUp() {
         Initialisation.browserSettings();
     }
 

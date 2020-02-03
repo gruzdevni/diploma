@@ -8,27 +8,27 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class Asserts {
 
-    private static SelenideElement SuccessNotification = $(withText("Успешно"));
-    private static SelenideElement ErrorNotification = $(withText("Ошибка"));
-    private static SelenideElement WrongFormatWarning = $(withText("Неверный формат"));
+    private SelenideElement SuccessNotification = $(withText("Успешно"));
+    private SelenideElement ErrorNotification = $(withText("Ошибка"));
+    private SelenideElement WrongFormatWarning = $(withText("Неверный формат"));
 
 
-    public static boolean isSuccessNotificationShown() {
+    public boolean isSuccessNotificationShown() {
         SuccessNotification.waitUntil(Condition.visible, 15000);
         return true;
     }
 
-    public static boolean isErrorNotificationShown() {
+    public boolean isErrorNotificationShown() {
         ErrorNotification.waitUntil(Condition.visible, 15000);
         return true;
     }
 
-    public static boolean isErrorNotificationNotShown() {
+    public boolean isErrorNotificationNotShown() {
         ErrorNotification.shouldNotBe(Condition.appear);
         return true;
     }
 
-    public static boolean isWrongFormatWarningShown() {
+    public boolean isWrongFormatWarningShown() {
         WrongFormatWarning.shouldBe(Condition.appear);
         return true;
     }
