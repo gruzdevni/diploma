@@ -40,7 +40,7 @@ public class SQL {
     }
 
     public static Connection connection() throws SQLException {
-        val conn = DriverManager.getConnection(url, "app", "pass");
+        val conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/app", "app", "pass");
         return conn;
     }
 

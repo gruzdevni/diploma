@@ -17,15 +17,15 @@ public class CreditValidCardTest {
         Initialisation.browserSettings();
     }
 
-    private CreditCardPage creditCardPage;
+    private CreditCardPage creditCardPage = new CreditCardPage();
+    private Asserts assertInstance = new Asserts();
 
     @Test
     @DisplayName("Проверка покупки в кредит по данным карты со статусом APPROVED")
     void first_successfulFormFilling() {
-        creditCardPage = new CreditCardPage();
         creditCardPage.approvedPageFilling();
-        assertTrue(Asserts.isSuccessNotificationShown());
-        assertTrue(Asserts.isErrorNotificationNotShown());
+        assertTrue(assertInstance.isSuccessNotificationShown());
+        assertTrue(assertInstance.isErrorNotificationNotShown());
     }
 
     @Test
@@ -34,5 +34,6 @@ public class CreditValidCardTest {
         assertNotNull(data.SQL.creditRow());
         assertEquals(String.valueOf(CardStatus.APPROVED), String.valueOf(data.SQL.creditStatus()), "Credit status should be as");
         assertEquals(data.SQL.creditTransactionId(), data.SQL.orderCreditId(), "Credit and Order IDs are not equal");
+        data.SQL.connection().close();
     }
 }

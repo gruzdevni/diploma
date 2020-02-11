@@ -17,15 +17,15 @@ public class DebitValidCardTest {
         Initialisation.browserSettings();
     }
 
-    private DebitCardPage debitCardPage;
+    private DebitCardPage debitCardPage = new DebitCardPage();
+    private Asserts assertInstance = new Asserts();
 
     @Test
     @DisplayName("Проверка покупки с помощью дебетовой карты со статусом APPROVED")
     void first_successfulFormFilling() {
-        debitCardPage = new DebitCardPage();
         debitCardPage.approvedPageFilling();
-        assertTrue(Asserts.isSuccessNotificationShown());
-        assertTrue(Asserts.isErrorNotificationNotShown());
+        assertTrue(assertInstance.isSuccessNotificationShown());
+        assertTrue(assertInstance.isErrorNotificationNotShown());
     }
 
     @Test
@@ -36,5 +36,6 @@ public class DebitValidCardTest {
         assertEquals(String.valueOf(CardStatus.APPROVED), String.valueOf(data.SQL.paymentStatus()), "Transaction status should be as");
         assertEquals(data.SQL.paymentTransactionId(), data.SQL.orderPaymentId(), "Transaction and Order IDs are not equal");
         assertEquals(45000, data.SQL.transactionAmount(), "Transaction amount should be as");
+        data.SQL.connection().close();
     }
 }

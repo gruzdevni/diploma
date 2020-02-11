@@ -17,14 +17,14 @@ public class DebitNotValidCardTest {
         Initialisation.browserSettings();
     }
 
-    private DebitCardPage debitCardPage;
+    private DebitCardPage debitCardPage = new DebitCardPage();
+    private Asserts assertInstance = new Asserts();
 
     @Test
     @DisplayName("Проверка покупки с помощью дебетовой карты со статусом DECLINED")
     void first_successfulFormFilling() {
-        debitCardPage = new DebitCardPage();
         debitCardPage.declinedPageFilling();
-        assertTrue(Asserts.isErrorNotificationShown());
+        assertTrue(assertInstance.isErrorNotificationShown());
     }
 
     @Test
@@ -34,5 +34,6 @@ public class DebitNotValidCardTest {
         assertNotNull(data.SQL.paymentRow());
         assertEquals(String.valueOf(CardStatus.DECLINED), String.valueOf(data.SQL.paymentStatus()), "Transaction status should be as");
         assertNull(data.SQL.transactionAmount(), "Transaction amount should as");
+        data.SQL.connection().close();
         }
     }

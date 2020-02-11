@@ -1,42 +1,42 @@
 package data;
 
-import org.openqa.selenium.Keys;
-
-import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
-import static data.Form.formFilling;
-
 public class CreditCardPage {
+
+    private Initialisation homePage = new Initialisation();
+    private Form creditButton = new Form();
+    private Form formInstance = new Form();
+    private DataGeneration card = new DataGeneration();
+    private Form continueButton = new Form();
+
     public CreditCardPage declinedPageFilling() {
-        Initialisation.loadPage();
-        Form.creditButton();
-        Form.formFilling(DataGeneration.declinedCard());
-        Form.continueButton();
+        homePage.load();
+        creditButton.pushCreditButton();
+        formInstance.formFillingFull(card.declinedCard());
+        continueButton.pushContinueButton();
         return new CreditCardPage();
     }
 
     public CreditCardPage approvedPageFilling() {
-        Initialisation.loadPage();
-        Form.creditButton();
-        Form.formFilling(DataGeneration.approvedCard());
-        Form.continueButton();
+        homePage.load();
+        creditButton.pushCreditButton();
+        formInstance.formFillingFull(card.approvedCard());
+        continueButton.pushContinueButton();
         return new CreditCardPage();
     }
 
     public CreditCardPage withoutOutCVCFilling() {
-        Initialisation.loadPage();
-        Form.creditButton();
-        Form.formFillingWithoutCVC(DataGeneration.approvedCard());
-        Form.continueButton();
+        homePage.load();
+        creditButton.pushCreditButton();
+        formInstance.formFillingWithoutCVC(card.approvedCard());
+        continueButton.pushContinueButton();
         return new CreditCardPage();
     }
 
     public CreditCardPage wrongCardFilling() {
-        Initialisation.loadPage();
-        Form.creditButton();
-        Form.formFilling(DataGeneration.wrongCard());
-        Form.continueButton();
+        homePage.load();
+        creditButton.pushCreditButton();
+        formInstance.formFillingFull(card.wrongCard());
+        continueButton.pushContinueButton();
         return new CreditCardPage();
     }
 }

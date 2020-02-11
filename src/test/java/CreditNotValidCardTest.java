@@ -17,14 +17,14 @@ public class CreditNotValidCardTest {
         Initialisation.browserSettings();
     }
 
-    private CreditCardPage creditCardPage;
+    private CreditCardPage creditCardPage = new CreditCardPage();
+    private Asserts assertInstance = new Asserts();
 
     @Test
     @DisplayName("Проверка покупки в кредит по данным карты со статусом DECLINED")
     void first_successfulFormFilling() {
-        creditCardPage = new CreditCardPage();
         creditCardPage.declinedPageFilling();
-        assertTrue(Asserts.isErrorNotificationShown());
+        assertTrue(assertInstance.isErrorNotificationShown());
     }
 
     @Test
@@ -34,5 +34,6 @@ public class CreditNotValidCardTest {
         assertNotNull(data.SQL.creditRow());
         assertEquals(String.valueOf(CardStatus.DECLINED), String.valueOf(data.SQL.creditStatus()), "Credit status should be as");
         assertEquals(data.SQL.creditTransactionId(), data.SQL.orderCreditId(), "Credit and Order IDs are not equal");
+        data.SQL.connection().close();
     }
 }

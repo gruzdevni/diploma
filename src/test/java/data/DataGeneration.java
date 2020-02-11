@@ -6,7 +6,7 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.Random;
 
-public class DataGeneration {
+class DataGeneration {
     private Faker faker = new Faker(new Locale("en"));
 
     public String getName() {
@@ -28,7 +28,7 @@ public class DataGeneration {
         return "44444";
     }
 
-    public String getMonth() {
+    String getMonth() {
         int min = 1;
         int max = 12;
         int diff = max - min;

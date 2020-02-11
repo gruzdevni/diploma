@@ -15,13 +15,13 @@ public class NoCVCTest {
         Initialisation.browserSettings();
     }
 
-    private CreditCardPage creditCardPage;
+    private CreditCardPage creditCardPage = new CreditCardPage();
+    private Asserts assertInstance = new Asserts();
 
     @Test
     @DisplayName("Проверка покупки, если поле CVC не заполнено.")
     void NoCVC() {
-        creditCardPage = new CreditCardPage();
         creditCardPage.withoutOutCVCFilling();
-        assertTrue(Asserts.isWrongFormatWarningShown());
+        assertTrue(assertInstance.isWrongFormatWarningShown());
     }
 }

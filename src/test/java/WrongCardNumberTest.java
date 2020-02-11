@@ -14,13 +14,13 @@ public class WrongCardNumberTest {
         Initialisation.browserSettings();
     }
 
-    private CreditCardPage creditCardPage;
+    private CreditCardPage creditCardPage = new CreditCardPage();
+    private Asserts assertInstance = new Asserts();
 
     @Test
     @DisplayName("Проверка покупки, если поле Карта заполнено некорректно.")
     void WrongCardNumber() {
-        creditCardPage = new CreditCardPage();
         creditCardPage.wrongCardFilling();
-        assertTrue(Asserts.isWrongFormatWarningShown());
+        assertTrue(assertInstance.isWrongFormatWarningShown());
     }
 }
