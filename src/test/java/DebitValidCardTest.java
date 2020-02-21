@@ -22,15 +22,11 @@ public class DebitValidCardTest {
 
     @Test
     @DisplayName("Проверка покупки с помощью дебетовой карты со статусом APPROVED")
-    void first_successfulFormFilling() {
+    void second_dataBaseTest() throws SQLException {
+        data.SQL.connection();
         debitCardPage.approvedPageFilling();
         assertTrue(assertInstance.isSuccessNotificationShown());
         assertTrue(assertInstance.isErrorNotificationNotShown());
-    }
-
-    @Test
-    void second_dataBaseTest() throws SQLException {
-        data.SQL.connection();
         assertNotNull(data.SQL.orderRow());
         assertNotNull(data.SQL.paymentRow());
         assertEquals(String.valueOf(CardStatus.APPROVED), String.valueOf(data.SQL.paymentStatus()), "Transaction status should be as");

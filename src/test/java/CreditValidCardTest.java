@@ -22,14 +22,11 @@ public class CreditValidCardTest {
 
     @Test
     @DisplayName("Проверка покупки в кредит по данным карты со статусом APPROVED")
-    void first_successfulFormFilling() {
+    void second_dataBaseTest() throws SQLException {
+        data.SQL.connection();
         creditCardPage.approvedPageFilling();
         assertTrue(assertInstance.isSuccessNotificationShown());
         assertTrue(assertInstance.isErrorNotificationNotShown());
-    }
-
-    @Test
-    void second_dataBaseTest() throws SQLException {
         assertNotNull(data.SQL.orderRow());
         assertNotNull(data.SQL.creditRow());
         assertEquals(String.valueOf(CardStatus.APPROVED), String.valueOf(data.SQL.creditStatus()), "Credit status should be as");

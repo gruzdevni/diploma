@@ -22,14 +22,10 @@ public class DebitNotValidCardTest {
 
     @Test
     @DisplayName("Проверка покупки с помощью дебетовой карты со статусом DECLINED")
-    void first_successfulFormFilling() {
-        debitCardPage.declinedPageFilling();
-        assertTrue(assertInstance.isErrorNotificationShown());
-    }
-
-    @Test
     void second_dataBaseTest() throws SQLException {
         data.SQL.connection();
+        debitCardPage.declinedPageFilling();
+        assertTrue(assertInstance.isErrorNotificationShown());
         assertNotNull(data.SQL.orderRow());
         assertNotNull(data.SQL.paymentRow());
         assertEquals(String.valueOf(CardStatus.DECLINED), String.valueOf(data.SQL.paymentStatus()), "Transaction status should be as");

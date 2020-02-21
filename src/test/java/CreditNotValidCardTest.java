@@ -22,14 +22,10 @@ public class CreditNotValidCardTest {
 
     @Test
     @DisplayName("Проверка покупки в кредит по данным карты со статусом DECLINED")
-    void first_successfulFormFilling() {
-        creditCardPage.declinedPageFilling();
-        assertTrue(assertInstance.isErrorNotificationShown());
-    }
-
-    @Test
     void second_dataBaseTest() throws SQLException {
         data.SQL.connection();
+        creditCardPage.declinedPageFilling();
+        assertTrue(assertInstance.isErrorNotificationShown());
         assertNotNull(data.SQL.orderRow());
         assertNotNull(data.SQL.creditRow());
         assertEquals(String.valueOf(CardStatus.DECLINED), String.valueOf(data.SQL.creditStatus()), "Credit status should be as");
