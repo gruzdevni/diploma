@@ -76,10 +76,10 @@
             - Через DBeaver настроить подключение к БД. Пример настройки подключения к PostgreSQL:
             ![postgreSQL-connection-settings](https://github.com/gruzdevni/diploma/blob/master/resources/postgreSQL-connection-settings.PNG) 
     * Выполнить подключение к БД. Таблиц в БД нет, так как приложение еще не запущено.
-    * Запустить сервис gate-simulator. В корне проекта имется папка gate-simulator. Из этой папки нужно выполнить команду `npm start`.
+    * Запустить сервис gate-simulator. В корне проекта имется папка gate. Из этой папки нужно выполнить команду `npm start`.
       Скриншот запущенного приложения:
       ![gate-simulator-launched](https://github.com/gruzdevni/diploma/blob/master/resources/gate-simulator-launched.png)
-3. После этих шагов следовать командам выше по [ссылке](#AUT_launch)    
+3. После этих шагов следовать командам выше по [ссылке](#AUT_launch).    
       
       ___Примечания___
       
