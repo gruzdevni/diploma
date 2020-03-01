@@ -2,8 +2,50 @@
 
 [План работ](https://github.com/gruzdevni/diploma/blob/master/resources/Plan.md)
 
+Предварительные шаги:
+* Склонируйте репозиторий с дипломным проектом:
+
+`git clone https://github.com/gruzdevni/diploma`
+
+* Для создания сервера БД и запуска базы на Postgres выполните:
+
+`$ docker run --name aqa-post -p 5432:5432 -e POSTGRES_USER=app -e POSTGRES_PASSWORD=pass -e POSTGRES_DB=app -d postgres`
+
+`$ docker start aqa-post`
+
+* Для создания сервера БД и запуска базы на MySQL выполните:
+
+`$ docker run --name aqa-mysql -p 3306:3306 -e MYSQL_USER=app -e MYSQL_PASSWORD=pass -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=app -d mysql`
+
+`$ docker start aqa-mysql`
+
+* Для запуска приложения на Node.js выполните:
+
+`$ docker run --name gate -p 9999:9999 -d nikolaygr/gate-sim`
+
+<a name="AUT_launch"></a>После выполнения вышеуказанных шагов можно запускать AUT:
+
+* Для запуска приложения под MySQL использовать команду
+
+    `java -Dspring.datasource.url=jdbc:mysql://192.168.99.100:3306/app -jar aqa-shop.jar`
+    
+* Для запуска под PostgreSQL использовать команду
+
+    `java -Dspring.datasource.url=jdbc:postgresql://192.168.99.100:5432/app -jar aqa-shop.jar`
+    
+* Для запуска тестов для MySQL использовать команду
+
+     `gradlew -Durl=jdbc:mysql://192.168.99.100:3306/app clean test allureReport`
+     
+* Для запуска тестов для PostgreSQL использовать команду
+
+     `gradlew -Durl=jdbc:postgresql://192.168.99.100:5432/app clean test allureReport`
+     
+* Для получения отчета Allure:
+`gradlew allureServe`    
+
 <details>
-<summary>**Порядок действий для обеспечения возможности запуска автотестов**</summary>
+<summary>**Если у вас нет возможности использовать Docker, следуйте данной инструкции**</summary>
 
 ### Все действия выполняются на Windows. Если у вас другая ОС, то шаги/команды могут отличаться.
 
@@ -37,20 +79,9 @@
     * Запустить сервис gate-simulator. В корне проекта имется папка gate-simulator. Из этой папки нужно выполнить команду `npm start`.
       Скриншот запущенного приложения:
       ![gate-simulator-launched](https://github.com/gruzdevni/diploma/blob/master/resources/gate-simulator-launched.png)
+3. После этих шагов следовать командам выше по [ссылке](#AUT_launch)    
       
       ___Примечания___
       
       _База данных app создается единожды (для каждой СУБД)._
 </details>
-
-* Для запуска приложения под MySQL использовать команду
-    `java -Dspring.datasource.url=jdbc:mysql://localhost:3306/app -jar aqa-shop.jar`
-    
-* Для запуска под PostgreSQL использовать команду
-    `java -Dspring.datasource.url=jdbc:postgresql://localhost:5432/app -jar aqa-shop.jar`
-    
-* Для запуска тестов для MySQL использовать команду
-     `gradlew -Durl=jdbc:mysql://localhost:3306/app clean test allureReport`
-     
-* Для запуска тестов для PostgreSQL использовать команду
-     `gradlew -Durl=jdbc:postgresql://localhost:5432/app clean test allureReport`
