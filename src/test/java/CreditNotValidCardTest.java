@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CreditNotValidCardTest {
 
     @BeforeAll
-    public void setUp() {
+    public static void setUp() {
         Initialisation.browserSettings();
     }
 
@@ -21,11 +21,17 @@ public class CreditNotValidCardTest {
     private Asserts assertInstance = new Asserts();
 
     @Test
-    @DisplayName("Проверка покупки в кредит по данным карты со статусом DECLINED")
-    void second_dataBaseTest() throws SQLException {
-        data.SQL.connection();
+    @DisplayName("Проверка фронтенда на покупку в кредит по данным карты со статусом DECLINED")
+    void first_frontendTest() {
         creditCardPage.declinedPageFilling();
         assertTrue(assertInstance.isErrorNotificationShown());
+    }
+
+    @Test
+    @DisplayName("Проверка базы данных на покупку в кредит по данным карты со статусом DECLINED")
+    void second_dataBaseTest() throws SQLException {
+        creditCardPage.declinedPageFilling();
+        data.SQL.connection();
         assertNotNull(data.SQL.orderRow());
         assertNotNull(data.SQL.creditRow());
         assertEquals(String.valueOf(CardStatus.DECLINED), String.valueOf(data.SQL.creditStatus()), "Credit status should be as");

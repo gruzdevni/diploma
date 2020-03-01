@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class DebitValidCardTest {
 
     @BeforeAll
-    public void setUp() {
+    public static void setUp() {
         Initialisation.browserSettings();
     }
 
@@ -21,14 +21,20 @@ public class DebitValidCardTest {
     private Asserts assertInstance = new Asserts();
 
     @Test
-    @DisplayName("Проверка покупки с помощью дебетовой карты со статусом APPROVED")
-    void second_dataBaseTest() throws SQLException {
-        data.SQL.connection();
+    @DisplayName("Проверка фронтенда на покупку с помощью дебетовой карты со статусом APPROVED")
+    void first_frontendTest() {
         debitCardPage.approvedPageFilling();
         assertTrue(assertInstance.isSuccessNotificationShown());
         assertTrue(assertInstance.isErrorNotificationNotShown());
-        assertNotNull(data.SQL.orderRow());
-        assertNotNull(data.SQL.paymentRow());
+    }
+
+    @Test
+    @DisplayName("Проверка базы данных на покупку с помощью дебетовой карты со статусом APPROVED")
+    void second_dataBaseTest() throws SQLException {
+        debitCardPage.approvedPageFilling();
+        data.SQL.connection();
+        assertNotNull(data.SQL.orderRow(), "Запись в таблицу заказов базы данных не произведена.");
+        assertNotNull(data.SQL.paymentRow(), "Запись в таблицу оплат базы данных не произведена.");
         assertEquals(String.valueOf(CardStatus.APPROVED), String.valueOf(data.SQL.paymentStatus()), "Transaction status should be as");
         assertEquals(data.SQL.paymentTransactionId(), data.SQL.orderPaymentId(), "Transaction and Order IDs are not equal");
         assertEquals(45000, data.SQL.transactionAmount(), "Transaction amount should be as");

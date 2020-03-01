@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class NoCVCTest {
 
     @BeforeAll
-    public void setUp() {
+    public static void setUp() {
         Initialisation.browserSettings();
     }
 

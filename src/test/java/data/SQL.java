@@ -10,7 +10,9 @@ import java.sql.SQLException;
 
 public class SQL {
 
-    public static String url = System.getProperty("url");
+    public static String getUrl() {
+        return System.getProperty("url");
+    }
 
     public static String latestOrderQuery() {
         return "SELECT * FROM order_entity WHERE created IN (SELECT max(created) FROM order_entity);";
@@ -40,7 +42,7 @@ public class SQL {
     }
 
     public static Connection connection() throws SQLException {
-        val conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/app", "app", "pass");
+        val conn = DriverManager.getConnection("jdbc:postgresql://192.168.99.100:5432/app", "app", "pass");
         return conn;
     }
 
@@ -78,5 +80,5 @@ public class SQL {
     }
 }
 
-// "jdbc:mysql://localhost:3306/app?useUnicode=true&serverTimezone=UTC"
-// "jdbc:postgresql://localhost:5432/app"
+// "jdbc:mysql://192.168.99.100:3306/app?useUnicode=true&serverTimezone=UTC"
+// "jdbc:postgresql://192.168.99.100:5432/app"

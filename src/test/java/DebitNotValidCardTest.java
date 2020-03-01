@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class DebitNotValidCardTest {
 
     @BeforeAll
-    public void setUp() {
+    public static void setUp() {
         Initialisation.browserSettings();
     }
 
@@ -21,13 +21,19 @@ public class DebitNotValidCardTest {
     private Asserts assertInstance = new Asserts();
 
     @Test
-    @DisplayName("Проверка покупки с помощью дебетовой карты со статусом DECLINED")
-    void second_dataBaseTest() throws SQLException {
-        data.SQL.connection();
+    @DisplayName("Проверка фронтенда на покупку с помощью дебетовой карты со статусом DECLINED")
+    void first_frontendTest() throws SQLException {
         debitCardPage.declinedPageFilling();
         assertTrue(assertInstance.isErrorNotificationShown());
-        assertNotNull(data.SQL.orderRow());
-        assertNotNull(data.SQL.paymentRow());
+    }
+
+    @Test
+    @DisplayName("Проверка базы данных на покупку с помощью дебетовой карты со статусом DECLINED")
+    void second_dataBaseTest() throws SQLException {
+        debitCardPage.declinedPageFilling();
+        data.SQL.connection();
+        assertNotNull(data.SQL.orderRow(), "No information is written to Data Base");
+        assertNotNull(data.SQL.paymentRow(), "No information is written to Data Base");
         assertEquals(String.valueOf(CardStatus.DECLINED), String.valueOf(data.SQL.paymentStatus()), "Transaction status should be as");
         assertNull(data.SQL.transactionAmount(), "Transaction amount should as");
         data.SQL.connection().close();
