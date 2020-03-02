@@ -1,6 +1,12 @@
-# Дипломный проект
+# Дипломный проект по специальности Тестировщик ("ЦОО Нетология-групп")
 
 [План работ](https://github.com/gruzdevni/diploma/blob/master/resources/Plan.md)
+
+[Отчет по итогам тестирования](https://github.com/gruzdevni/diploma/blob/master/Report.md)
+
+[Отчет по итогам автоматизации](https://github.com/gruzdevni/diploma/blob/master/Summary.md)
+
+---
 
 Предварительные шаги:
 * Склонируйте репозиторий с дипломным проектом:
