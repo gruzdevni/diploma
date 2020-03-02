@@ -42,7 +42,7 @@ public class SQL {
     }
 
     public static Connection connection() throws SQLException {
-        val conn = DriverManager.getConnection("jdbc:postgresql://192.168.99.100:5432/app", "app", "pass");
+        val conn = DriverManager.getConnection(getUrl(), "app", "pass");
         return conn;
     }
 
@@ -79,6 +79,3 @@ public class SQL {
         return paymentRow().getAmount();
     }
 }
-
-// "jdbc:mysql://192.168.99.100:3306/app?useUnicode=true&serverTimezone=UTC"
-// "jdbc:postgresql://192.168.99.100:5432/app"
