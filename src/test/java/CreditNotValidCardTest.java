@@ -22,14 +22,14 @@ public class CreditNotValidCardTest {
 
     @Test
     @DisplayName("Проверка фронтенда на покупку в кредит по данным карты со статусом DECLINED")
-    void first_frontendTest() {
+    void ShouldRejectCreditWithDeclinedCard() {
         creditCardPage.declinedPageFilling();
         assertTrue(assertInstance.isErrorNotificationShown());
     }
 
     @Test
     @DisplayName("Проверка базы данных на покупку в кредит по данным карты со статусом DECLINED")
-    void second_dataBaseTest() throws SQLException {
+    void ShouldDatabaseRecordCorrectForDeclinedCreditCard() throws SQLException {
         creditCardPage.declinedPageFilling();
         data.SQL.connection();
         assertNotNull(data.SQL.orderRow());

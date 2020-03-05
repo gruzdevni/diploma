@@ -19,7 +19,7 @@ public class WrongCardNumberTest {
 
     @Test
     @DisplayName("Проверка покупки, если поле Карта заполнено некорректно.")
-    void WrongCardNumber() {
+    void ShouldNotificationShownIfWrongCardNumber() {
         creditCardPage.wrongCardFilling();
         assertTrue(assertInstance.isWrongFormatWarningShown());
     }

@@ -22,14 +22,14 @@ public class DebitNotValidCardTest {
 
     @Test
     @DisplayName("Проверка фронтенда на покупку с помощью дебетовой карты со статусом DECLINED")
-    void first_frontendTest() throws SQLException {
+    void ShouldRejectPaymentWithDeclinedDebitCard() throws SQLException {
         debitCardPage.declinedPageFilling();
         assertTrue(assertInstance.isErrorNotificationShown());
     }
 
     @Test
     @DisplayName("Проверка базы данных на покупку с помощью дебетовой карты со статусом DECLINED")
-    void second_dataBaseTest() throws SQLException {
+    void ShouldDatabaseRecordCorrectForDeclinedDebitCard() throws SQLException {
         debitCardPage.declinedPageFilling();
         data.SQL.connection();
         assertNotNull(data.SQL.orderRow(), "No information is written to Data Base");

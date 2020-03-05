@@ -22,7 +22,7 @@ public class CreditValidCardTest {
 
     @Test
     @DisplayName("Проверка фронтенда на покупку в кредит по данным карты со статусом APPROVED")
-    void first_frontendTest() {
+    void ShouldAcceptCreditWithApprovedCard() {
         creditCardPage.approvedPageFilling();
         assertTrue(assertInstance.isSuccessNotificationShown());
         assertTrue(assertInstance.isErrorNotificationNotShown());
@@ -30,7 +30,7 @@ public class CreditValidCardTest {
 
     @Test
     @DisplayName("Проверка базы данных на покупку в кредит по данным карты со статусом APPROVED")
-    void second_dataBaseTest() throws SQLException {
+    void ShouldDatabaseRecordCorrectForApprovedCreditCard() throws SQLException {
         creditCardPage.approvedPageFilling();
         data.SQL.connection();
         assertNotNull(data.SQL.orderRow());

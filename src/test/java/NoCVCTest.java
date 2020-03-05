@@ -20,7 +20,7 @@ public class NoCVCTest {
 
     @Test
     @DisplayName("Проверка покупки, если поле CVC не заполнено.")
-    void NoCVC() {
+    void ShouldNotificationShownIfNoCVC() {
         creditCardPage.withoutOutCVCFilling();
         assertTrue(assertInstance.isWrongFormatWarningShown());
     }

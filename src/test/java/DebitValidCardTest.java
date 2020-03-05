@@ -22,7 +22,7 @@ public class DebitValidCardTest {
 
     @Test
     @DisplayName("Проверка фронтенда на покупку с помощью дебетовой карты со статусом APPROVED")
-    void first_frontendTest() {
+    void ShouldAcceptPaymentWithApprovedDebitCard() {
         debitCardPage.approvedPageFilling();
         assertTrue(assertInstance.isSuccessNotificationShown());
         assertTrue(assertInstance.isErrorNotificationNotShown());
@@ -30,7 +30,7 @@ public class DebitValidCardTest {
 
     @Test
     @DisplayName("Проверка базы данных на покупку с помощью дебетовой карты со статусом APPROVED")
-    void second_dataBaseTest() throws SQLException {
+    void ShouldDatabaseRecordCorrectForApprovedDebitCard() throws SQLException {
         debitCardPage.approvedPageFilling();
         data.SQL.connection();
         assertNotNull(data.SQL.orderRow(), "Запись в таблицу заказов базы данных не произведена.");
